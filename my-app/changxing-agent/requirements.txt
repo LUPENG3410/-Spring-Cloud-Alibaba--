@@ -1,0 +1,9 @@
+fastapi==0.138.1
+uvicorn==0.49.0
+pydantic==2.13.4
+httpx==0.28.1
+python-dotenv==1.2.2
+sse-starlette==3.4.5
+langchain-core==1.6.3
+langchain-openai==1.6.2
+numpy==2.5.3
