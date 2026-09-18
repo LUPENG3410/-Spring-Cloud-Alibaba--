@@ -1,0 +1,87 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: changxing-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: public   # 加上这行，和 auth/car 服务保持一致
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: changxing-auth
+          uri: lb://changxing-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-user
+          uri: lb://changxing-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-car
+          uri: lb://changxing-car
+          predicates:
+            - Path=/api/cars/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-images
+          uri: lb://changxing-car
+          predicates:
+            - Path=/api/images/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-booking
+          uri: lb://changxing-booking
+          predicates:
+            - Path=/api/bookings/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-insurance
+          uri: lb://changxing-booking
+          predicates:
+            - Path=/api/insurance-products/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-store
+          uri: lb://changxing-store
+          predicates:
+            - Path=/api/stores/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-review
+          uri: lb://changxing-review
+          predicates:
+            - Path=/api/reviews/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-admin
+          uri: lb://changxing-admin
+          predicates:
+            - Path=/api/admin/**
+          filters:
+            - StripPrefix=1
+        - id: changxing-upload
+          uri: lb://changxing-admin
+          predicates:
+            - Path=/api/upload/**
+          filters:
+            - StripPrefix=1
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600

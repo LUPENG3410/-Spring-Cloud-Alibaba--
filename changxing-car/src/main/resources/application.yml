@@ -1,0 +1,44 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: changxing-car
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/0623?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: public
+        fail-fast: false
+        ip-address: 127.0.0.1 # 强制注册本地127回环IP，解决网关503
+        prefer-ip-address: true # 启用自定义注册IP
+
+# MinIO配置
+minio:
+  endpoint: http://127.0.0.1:9000
+  access-key: admin
+  secret-key: 12345678
+  bucket: changxing
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.changxing</groupId>
+    <artifactId>changxing-rental</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>changxing-rental</name>
+    <description>长兴租车微服务聚合父工程</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>changxing-common</module>
+        <module>changxing-gateway</module>
+        <module>changxing-auth</module>
+        <module>changxing-user</module>
+        <module>changxing-car</module>
+        <module>changxing-booking</module>
+        <module>changxing-store</module>
+        <module>changxing-review</module>
+        <module>changxing-admin</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <mysql.version>8.0.25</mysql.version>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
+
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <cloud-alibaba.version>2023.0.1.0</cloud-alibaba.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.changxing</groupId>
+                <artifactId>changxing-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,62 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: changxing-booking
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+  datasource:
+    url: jdbc:mysql://localhost:3306/0623?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 2
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deletedAt
+      logic-delete-value: "1"
+      logic-not-delete-value: "0"
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 5000
+        read-timeout: 10000
+  sentinel:
+    enabled: true
+
+# Redisson配置
+redisson:
+  single-server-config:
+    address: "redis://127.0.0.1:6379"
+    database: 2
+    connection-minimum-idle-size: 10
+    connection-pool-size: 64
+
+logging:
+  level:
+    com.changxing: DEBUG
